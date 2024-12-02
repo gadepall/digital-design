@@ -1,4 +1,19 @@
-#include <Arduino.h>
+//Code by GVV Sharma
+//November 25, 2024
+//https://www.gnu.org/licenses/gpl-3.0.en.html
+//
+//Seven segment diplay OTA
+//
+//----------------------Skeleton Code--------------------//
+#include <WiFi.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
+
+//    Can be client or even host   //
+#ifndef STASSID
+#define STASSID "npal"  // Replace with your network credentials
+#define STAPSK  "npal1234"  
+#endif
 
 // Define pins used on Arduino
 #define PIN_A_1D_1 13
@@ -12,8 +27,36 @@
 // LED_BUILTIN is a predefined macro
 // in Arduino.h for digital pin 13.
 
-// Setup: Code to be executed once at the start here
-void setup() {
+
+const char* ssid = STASSID;
+const char* password = STAPSK;
+
+
+
+
+void OTAsetup() {
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    delay(5000);
+    ESP.restart();
+  }
+  ArduinoOTA.begin();
+}
+
+void OTAloop() {
+  ArduinoOTA.handle();
+}
+
+//-------------------------------------------------------//
+void disp_7447(int D, int C, int B, int A);
+
+void setup(){
+  OTAsetup();
+
+  //-------------------//
+  // Custom setup code //
+  //-------------------//
     // Set pin modes to INPUT and OUTPUT as appropriate
     pinMode(PIN_A_1D_1, OUTPUT);
     pinMode(PIN_B_2D_1, OUTPUT);
@@ -31,10 +74,16 @@ void setup() {
     digitalWrite(PIN_C_1D_2, LOW);
     digitalWrite(PIN_D_2D_2, LOW);
     delay(1000);
+
 }
 
-// Loop: code that executes forever goes here
 void loop() {
+  OTAloop();
+  delay(10);  // If no custom loop code ensure to have a delay in loop
+  //-------------------//
+  // Custom loop code  //
+  //-------------------//
+  //
     // Feedback inputs
     int a, b, c, d;
     // Outputs to 7447
@@ -65,3 +114,15 @@ void loop() {
     digitalWrite(PIN_D_2D_2, D);
     delay(1000);
 }
+
+
+//Function to drive the IC
+void disp_7447(int D, int C, int B, int A)
+{
+  digitalWrite(13, A); //LSB
+  digitalWrite(12, B); 
+  digitalWrite(14, C); 
+  digitalWrite(27, D); //MSB
+
+}
+

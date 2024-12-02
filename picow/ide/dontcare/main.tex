@@ -1,0 +1,90 @@
+We explain Karnaugh maps (K-map) using don't care conditions
+%
+\begin{enumerate}[label=\arabic*.,ref=\theenumi]
+\item {Don't Care Conditions: }
+4 binary digits are used in the incrementing decoder in 
+		Table 
+\ref{table:disp_dec}.
+		%\cite{gvv_kmap}  
+		However, only the numbers from 0-9 are used as input/output
+in the decoder and we {\em don't care} about the numbers from 10-15.  This phenomenon can be addressed by revising the truth table in 
+		Table 
+\ref{table:disp_dec}
+		%\cite{gvv_kmap}
+to obtain Table \ref{table:dont_care_table}.
+%\begin{table}[!htb]
+\begin{table}[H]
+	\centering
+\input{ide/dontcare/figs/dont_care_table}
+\caption{}
+\label{table:dont_care_table}
+\end{table}
+\item  The revised K-map for A is available in Fig \ref{fig:kmap_A_x}.  Show that 
+\begin{equation}
+A = {W}^{\prime}
+\end{equation}
+\begin{figure}[H]
+%\begin{figure}[!htb]
+	\centering
+\resizebox {0.5\columnwidth} {!} {
+\input{ide/dontcare/figs/kmap_A_x}
+}
+\caption{K-map for $A$ with don't cares}
+\label{fig:kmap_A_x}
+\end{figure}
+%
+\item  The revised K-map for B is available in Fig \ref{fig:kmap_B_x}.  Show that 
+%
+\begin{equation}
+B = WX^{\prime}Z^{\prime} + W^{\prime}X
+\end{equation}
+%\begin{figure}[H]
+\begin{figure}[!htb]
+	\centering
+\resizebox {0.5\columnwidth} {!} {
+\input{ide/dontcare/figs/kmap_B_x}
+}
+\caption{K-map for $B$ with don't cares}
+\label{fig:kmap_B_x}
+\end{figure}
+%
+\item  The revised K-map for C is available in Fig \ref{fig:kmap_C_x}.  Show that 
+%
+\begin{equation}
+C = {X}^{\prime}{Y} + {W}^{\prime}{Y} + {W}{X}{Y}^{\prime}
+\end{equation}
+\begin{figure}[H]
+	\centering
+\resizebox {0.5\columnwidth} {!} {
+\input{ide/dontcare/figs/kmap_C_x}
+}
+\caption{K-map for $C$ with don't cares}
+\label{fig:kmap_C_x}
+\end{figure}
+%
+\item  The revised K-map for D is available in Fig \ref{fig:kmap_D_x}.  Show that 
+%
+\begin{equation}
+D  = {W}^{\prime}{Z} + {W}{X}{Y}
+\end{equation}
+\begin{figure}[H]
+	\centering
+\resizebox {0.5\columnwidth} {!} {
+\input{ide/dontcare/figs/kmap_D_x}
+}
+\caption{K-map for $D$ with don't cares}
+\label{fig:kmap_D_x}
+\end{figure}
+%
+\item 
+	Verify the incrementing decoder with don't care conditions using the pico W.
+%\tabref{tab:ide/7447/counter_decoder} 
+\item {Display Decoder:}
+In \tabref{table:disp_dec},
+use K-maps to obtain the minimized expressions for $a,b,c,d,e,f,g$ in terms of $A,B,C,D$ with  don't care conditions.  Verify using pico W.
+%\ref{fig:dec_counter}  
+\end{enumerate}
+
+
+
+

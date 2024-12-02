@@ -1,0 +1,147 @@
+We explain Karnaugh maps (K-map) by finding the
+logic functions for the incrementing decoder
+%
+\begin{enumerate}[label=\arabic*.,ref=\theenumi]
+%
+	\item The incrementing decoder   takes the numbers $0,,\dots,9$ in binary as inputs and generates
+the consecutive number as output.  The corresponding truth table is available in \tabref{tab:ide/7447/counter_decoder}
+%\input{ide/kmap/figs/counter_decoder}
+%
+\item Using Boolean logic, output $A$  in \tabref{tab:ide/7447/counter_decoder} can be expressed in terms of the inputs $W,X,Y,Z$ as
+\begin{align}
+\label{eq:A}
+A = W^{\prime}X^{\prime}Y^{\prime}Z^{\prime} + W^{\prime}XY^{\prime}Z^{\prime}
++W^{\prime}X^{\prime}YZ^{\prime}
++W^{\prime}XYZ^{\prime}
++W^{\prime}X^{\prime}Y^{\prime}Z
+\end{align}
+\item K-Map for $A$: 
+%\begin{figure}[H]
+\begin{figure}[!htb]
+	\centering
+\resizebox {0.5\columnwidth} {!} {
+\input{ide/kmap/figs/kmap_A}
+}
+\caption{K-map for $A$}
+\label{fig:kmap_A}
+\end{figure}
+%
+The expression in \eqref{eq:A}  can be minimized using the K-map in \figref{fig:kmap_A}
+In \figref{fig:kmap_A},  the {\em implicants} in boxes 0,2,4,6 result in $W^{\prime}Z^{\prime}$.  The implicants in
+boxes 0,8 result in $W^{\prime}X^{\prime}Y^{\prime}$.  Thus, after minimization using \figref{fig:kmap_A},  \eqref{eq:A} can be expressed as
+%
+\begin{equation}
+\label{eq:kmap_A}
+A = W^{\prime}Z^{\prime}+W^{\prime}X^{\prime}Y^{\prime}
+\end{equation}
+%
+Using the fact that
+\begin{align}
+\label{eq:boolean}
+\begin{split}
+X+X^{\prime} &= 1
+\\
+XX^{\prime} &= 0,
+\end{split}
+\end{align}
+%
+derive \eqref{eq:kmap_A} from \eqref{eq:A} algebraically
+%
+%
+\item K-Map for $B$:
+From Table \ref{tab:ide/7447/counter_decoder}, using boolean logic,
+\begin{equation}
+\label{eq:B}
+B = WX^{\prime}Y^{\prime}Z^{\prime} + W^{\prime}XY^{\prime}Z^{\prime}
++WX^{\prime}YZ^{\prime}
++W^{\prime}XYZ^{\prime}
+\end{equation}
+%
+Show that \eqref{eq:B} can be reduced to
+\begin{equation}
+\label{eq:kmap_B}
+B = WX^{\prime}Z^{\prime} + W^{\prime}XZ^{\prime}
+\end{equation}
+using Fig \ref{fig:kmap_B}
+%
+\begin{figure}[H]
+	\centering
+\resizebox {0.5\columnwidth} {!} {
+\input{ide/kmap/figs/kmap_B}
+}
+\caption{K-map for $B$}
+\label{fig:kmap_B}
+\end{figure}
+\item Derive \eqref{eq:kmap_B} from \eqref{eq:B} algebraically using \eqref{eq:boolean}
+%
+\item {K-Map for $C$: }
+From Table \ref{tab:ide/7447/counter_decoder}, using boolean logic,
+\begin{equation}
+\label{eq:C}
+C = WXY^{\prime}Z^{\prime} + W^{\prime}X^{\prime}YZ^{\prime}
++WX^{\prime}YZ^{\prime}
++W^{\prime}XYZ^{\prime}
+\end{equation}
+%
+%
+Show that \eqref{eq:C} can be reduced to
+\begin{equation}
+\label{eq:kmap_C}
+C = WXY^{\prime}Z^{\prime}  +  X^{\prime}YZ^{\prime} + W^{\prime}YZ^{\prime}
+\end{equation}
+using \figref{fig:kmap_C}.
+%
+\begin{figure}[H]
+	\centering
+\resizebox {0.5\columnwidth} {!} {
+\input{ide/kmap/figs/kmap_C}
+}
+\caption{K-map for $C$}
+\label{fig:kmap_C}
+\end{figure}
+%
+\item 
+Derive \eqref{eq:kmap_C} from \eqref{eq:C} algebraically using \eqref{eq:boolean}
+%
+\item {K-Map for $D$: }
+From Table \ref{tab:ide/7447/counter_decoder}, using boolean logic,
+\begin{equation}
+\label{eq:D}
+D = WXYZ^{\prime} + W^{\prime}X^{\prime}Y^{\prime}Z
+\end{equation}
+%
+%\begin{figure}[H]
+\begin{figure}[!htb]
+	\centering
+\resizebox {0.5\columnwidth} {!} {
+\input{ide/kmap/figs/kmap_D}
+}
+\caption{K-map for $D$}
+\label{fig:kmap_D}
+\end{figure}
+%
+\item 
+Minimize \eqref{eq:D} using Fig \ref{fig:kmap_D}
+%
+\item Execute the code in
+\begin{lstlisting}
+ide/7447/codes/inc_dec/inc_dec.cpp
+\end{lstlisting}
+%
+and modify it using the K-Map equations for $A,B,C$ and $D$. Execute and verify for each case.
+\item {Display Decoder:}
+Table \ref{table:disp_dec} is the truth table for the display decoder in Fig.
+%\ref{fig:dec_counter}  
+\ref{fig:7447}.
+Use K-maps to obtain the minimized expressions for $a,b,c,d,e,f,g$ in terms of $A,B,C,D$.
+	%with and without don't care conditions
+%
+%\begin{table}[!htb]
+\begin{table}[H]
+	\centering
+\input{ide/kmap/figs/disp_dec}
+\caption{Truth table for display decoder.}
+\label{table:disp_dec}
+\end{table}
+\end{enumerate}
+
