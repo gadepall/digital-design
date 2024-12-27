@@ -1,0 +1,77 @@
+\begin{enumerate}[label=\arabic*.,ref=\theenumi]
+%\begin{enumerate}[label=\thesubsection.\arabic*.,ref=\thesubsection.\theenumi]
+\item List all available clocks in the STM32F103C8T6 blue pill.
+\\
+\solution See Table \ref{table:clocks}.
+\begin{table}[!ht]
+\begin{center}
+\input{./stm32/clocks/figs/clocks.tex}
+\end{center}
+\caption{STM32F103C8T6 Clock Types}
+\label{table:clocks}
+\end{table}
+\item Make connections as shown in Table \ref{table:/clocks/systick_pins}.
+\begin{table}[!ht]
+\footnotesize
+\input{./stm32/clocks/figs/systick_pins.tex}
+\caption{Pin Connections}
+\label{table:/clocks/systick_pins}
+\end{table}
+
+\subsection{HSE}
+\item Execute the following program
+\begin{lstlisting}
+clocks/codes/hse_systick_blink.c
+\end{lstlisting}
+\item Explain the following instruction
+\begin{lstlisting}
+RCC->CR =0x00010000;
+\end{lstlisting}
+\solution Fig. \ref{fig:rcc_cr} shows the RCC$->$CR register.  The above instruction enables the HSE crystal, which is 
+8 MHz for the STM32F103C8T6.
+%
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\columnwidth]{./stm32/clocks/figs/rcc_cr}
+\end{center}
+\caption{RCC Clock Control Register (RCC$->$CR)}
+\label{fig:rcc_cr}
+\end{figure}
+\item Explain the following instruction
+\begin{lstlisting}
+RCC->CFGR =0x00000001;	
+\end{lstlisting}
+\solution Fig. \ref{fig:rcc_cfgr} shows the RCC$->$CFGR register.  The above instruction makes the HSE as the system clock 
+through SW = 01.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=\columnwidth]{./stm32/clocks/figs/rcc_cfgr}
+\end{center}
+\caption{RCC clock Configuration Register (RCC$->$CFGR)}
+\label{fig:rcc_cfgr}
+\end{figure}
+\item Verify that HSE is the system clock by checking that SWS = 01.
+\subsection{PLL}
+\item Make the PLL as the system clock.
+\\
+\solution
+\begin{lstlisting}
+RCC->CFGR =0x00000010;	
+\end{lstlisting}
+\item Choose the PLL input as HSE.
+\begin{lstlisting}
+RCC->CFGR =0x00010010;	
+\end{lstlisting}
+\item Enable PLL
+\\
+\solution
+\begin{lstlisting}
+RCC->CR =0x01010000;
+\end{lstlisting}
+%
+\item Execute the following code.
+\begin{lstlisting}
+cd /clocks/pll_systick_blink.c
+\end{lstlisting}
+\item Make the PLL output = 24 MHz.
+\end{enumerate}

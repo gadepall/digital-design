@@ -1,0 +1,95 @@
+\begin{enumerate}[label=\arabic*.,ref=\theenumi]
+%\begin{enumerate}[label=\thesubsection.\arabic*.,ref=\thesubsection.\theenumi]
+\item Connect the USB-UART to STM32.   The hardware connections between the USB-UART, STM32 and LED are available in Table \ref{table:/gpio/pins}. Make sure that the LED is connected to PB4 through the resistor.
+\begin{table}[!ht]
+\centering
+\input{./stm32/gpio/figs/pins.tex}
+\caption{USB-UART to STM32 connections}
+\label{table:/gpio/pins}
+\end{table}
+%
+\item Execute 
+\begin{lstlisting}
+gpio/codes/gpio_example.c
+\end{lstlisting}
+\item Modify the above program to turn the LED off.
+\item Explain the following line.
+\begin{lstlisting}
+AFIO->MAPR = AFIO_MAPR_SWJ_CFG_JTAGDISABLE;
+\end{lstlisting}
+\solution By default, the PB3 and PB4 pins in the STM32F103C8T6 board cannot be used as GPIO pins.  The above
+command allows these pins to be configured for GPIO.
+\item What does the following command do?
+\begin{lstlisting}
+GPIOB->CRL = 0x00030000;	
+\end{lstlisting}
+\solution The STM32F103C8T6 has ports A and B, each  having 16 pins that can be used as GPIO output.  The above command enables the pin B4 of port B as an output pin
+See Tables \ref{table:gpio_enable}.
+
+\begin{table}[!ht]
+\centering
+\small
+%\resizebox{\textwidth}{!}{
+\input{./stm32/gpio/figs/gpio_enable.tex}
+%}
+\caption{GPIO Enable pins}
+\label{table:gpio_enable}
+\end{table}
+\item Explain the significance of the number (nibble) 0x3 corresponding to PB4 in Table \ref{table:gpio_enable}.
+\\
+\solution The nibble 0x3 = 0b0011.  From Table \ref{table:gpio_output},   The first two bits are CNF1=0, CNF0=0 which
+means that PB4 is configured as a general purpose push-pull output. The last two bits are 11, denoting the mode, which
+says that PB4 is  capable of a maximum output speed of 50 MHz.   
+\begin{table}[!ht]
+\centering
+\small
+%\resizebox{\textwidth}{!}{
+\input{./stm32/gpio/figs/gpio_output.tex}
+%}
+\caption{GPIO Output configuration}
+\label{table:gpio_output}
+\end{table}
+\item What does the following instruction do?
+\begin{lstlisting}
+GPIOB->BRR = (1<<4);
+\end{lstlisting}
+\solution BRR is the Bit Reset Register.  The least significant 16 bits are used to atomically set pin values to GND whereas the most significant 16 bits are used to atomically clear pin values to VDD. The above command clears PB4. 
+\\ 
+\item What does the following instruction do?
+\begin{lstlisting}
+GPIOB->BSRR = GPIO_BSRR_BR4;
+\end{lstlisting}
+\solution BSRR is the Bit Set/Reset Register.  GPIO\_BSRR\_BR4 is used to reset PB4.  The result is the same as the previous problem.
+\item Modify your program to control an LED using PA2.
+\subsection{GPIO Input}
+\item Connect PB7 to GND and execute the following code
+\begin{lstlisting}
+cd /gpio/gpio_input_example.c
+\end{lstlisting}
+\item What does the following instruction do?
+\begin{lstlisting}
+GPIOB->CRL = 0x80030000;	
+\end{lstlisting}
+\solution
+This instruction declares PB7 as an input pin.  0x8=0b1000.  According to Table \ref{table:gpio_input}, the mode 00 is used only for
+input and the first two bits 10 are used for pull-up/pull-down.
+\begin{table}[!ht]
+\centering
+\small
+%\resizebox{\textwidth}{!}{
+\input{./stm32/gpio/figs/gpio_input.tex}
+%}
+\caption{GPIO Input configuration}
+\label{table:gpio_input}
+\end{table}
+\item Explain the following instruction.
+\begin{lstlisting}
+#define B7	0x0080
+if (((GPIOB->IDR & B7) == 0 ))  
+	GPIOB->BRR = (1<<4); //PB4 = 0 (Led ON)		
+else
+	GPIOB->BSRR = (1<<4); //PB4 = 1 (Led OFF)					
+\end{lstlisting}
+\solution The instruction checks whether the 8th bit of GPIOB$->$ IDR, i.e. the input from PB7  is 0.  If so, then the LED connected to PB4
+should be ON.
+\end{enumerate}

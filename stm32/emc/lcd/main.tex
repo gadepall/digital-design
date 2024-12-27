@@ -1,0 +1,65 @@
+We show how to interface the $16 \times 2$ HD44780-controlled LCD using STM32F103C8T6.
+\begin{enumerate}[label=\arabic*.,ref=\theenumi]
+%\begin{enumerate}[label=\thesubsection.\arabic*.,ref=\thesubsection.\theenumi]
+\item Make connections as shown in Table \ref{table:lcd_pins}.
+\begin{table}[!h]
+\input{./stm32/lcd/figs/pins.tex}
+\caption{Pin Connections}
+\label{table:lcd_pins}
+\end{table}
+\item Execute the following program
+\begin{lstlisting}
+lcd/codes/lcd_example.c
+\end{lstlisting}
+The following problems explain how to display the string \textbf{0} on the screen using
+the above code.
+\item Write the ASCII code for the 0 character.
+\\
+\solution The code for 0 is \textbf{48 =0b00110000 = 0x30}.
+\\
+\item How is 0 written by the STM32 to the LCD controller.
+\\
+\solution For the number 0, the upper nibble 0011 is first written followed by the lower nibble 0000.
+This is done by
+\begin{lstlisting}
+void SendByte (byte data)
+{
+
+ SendNibble(data >> 4); // send upper 4 bits 0011
+ SendNibble(data); // send lower 4 bits 0000
+}
+\end{lstlisting}
+\item How is the nibble 0011 written to the LCD.
+\\
+\solution This is done by the following function where data = 0011.
+\begin{lstlisting}
+void SendNibble(byte data)
+{
+GPIOA->BRR = ~(data << 2) & 0b00111100;
+GPIOA->BSRR = (data << 2) & 0b00111100;
+ 
+ PulseEnableLine(); // clock 4 bits into controller
+}
+\end{lstlisting}
+The expression
+\begin{align}
+GPIOA->BSRR = (data << 2) \& 0b00111100 
+= 0b00001100.  
+\end{align}
+This ensures that 11 is written to the pins A2-A3.  Note that $<<$ indicates 2 left shifts. Similarly, 
+\begin{equation}
+GPIOA->BRR = ~(data << 2) \& 0b00111100
+\end{equation}
+\item ensures that 00 is written to the pins A4-A5. PulseEnableLine() provides a clock pulse used
+to write the nibble 0011 to the LCD.
+\item Which pins of the STM32 are used for what purpose?
+\\
+\solution The A2-A5 pins of the STM32 are used for pushing the upper/lower data nibble to the DB4-DB7 pins
+of the LCD using the BRR and BSRR registers.   The A0-A1 pins are used for Register Select and EN for the LCD.
+\item What is Register Select?
+\\
+\solution Register Select = 0 implies that LCD configuration commands are being written. For example, cursor on/off, clearing
+display, number of lines, etc... Register Select = 1 implies that
+characters are being writen to the LCD.
+\item Develop an arithmetic calculator using the STM32 along with the LCD.
+\end{enumerate}

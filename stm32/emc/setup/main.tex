@@ -1,0 +1,13 @@
+\begin{enumerate}[label=\arabic*.,ref=\theenumi]
+%\begin{enumerate}[label=\thesubsection.\arabic*.,ref=\thesubsection.\theenumi]
+	\item Copy your codes directory to the termux-debian root directory.
+		\begin{lstlisting}
+cp -r STM32F103C8T6 ~/STM32F103C8T6/
+cd ~/STM32F103C8T6 
+make bin
+\end{lstlisting}
+\item This will generate main.bin.  Flash it using the android app or platformio.
+\item Modify main.c in the STM32F103C8T6 directory and modify the code to keep the LED on. Flash it to the STM32 and verify.
+\end{enumerate}
+
+

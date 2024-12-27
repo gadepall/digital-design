@@ -1,0 +1,108 @@
+We show how to use the Internal Temperature Sensor to measure the CPU temperature through the ADC.
+\begin{enumerate}[label=\arabic*.,ref=\theenumi]
+%\begin{enumerate}[label=\thesubsection.\arabic*.,ref=\thesubsection.\theenumi]
+%\begin{enumerate}[label={\small\thesubsection.\arabic*.},ref=\thesubsection.\theenumi]
+\item Make connections as shown in Table \ref{table:lcd_pins}.
+\item Execute the following program
+\begin{lstlisting}
+stm32/adc/codes/internal_temp.c
+\end{lstlisting}
+\item What do you observe?
+\\
+\solution You should observe a number between 1750-1760. This is the output of the internal temperature
+sensor, captured in $ADC1->DR$.
+\item Find an expression for $V_{SENSE}$
+\\
+\solution
+\begin{equation}
+V_{SENSE} = 3.3 \times \frac{ADC1->DR}{4095}
+\end{equation}
+%
+\item Obtain the formula for finding the temperature of the STM32 and list the values of the various parameters.
+\\
+\solution The desired formula is
+\begin{equation}
+T = (V_{25}-V_{SENSE})/AvgSlope + 25
+\end{equation}
+where the typical values of the above parameters are 
+\input{./stm32/adc/figs/sensor.tex}
+%
+\item What is the default ADC frequency?
+\\
+\solution The ADC operates at 14 MHz by default and is indpendent of the processor frequency (8 MHz in this case). It can, however be synchronized with
+the processor clock for some real time applications.
+\item Explain the significance of the following instruction
+\begin{lstlisting}
+ADC1->SMPR1 |= ADC_SMPR1_SMP16;
+\end{lstlisting}
+\solution Through this command, $ADC1->SMPR1$ = 0x001C0000 where the SMPR1 register is shown in Fig. \ref{fig:smpr1}.  Note that
+this makes SMP16 = 111 which means that channel 16 sample time = 239.5 cycles.  Channel 16 is reserved for the internal temperature 
+sensor and is connected to ADC1.
+%
+\begin{figure}
+\centering
+%\includegraphics[width=\columnwidth]{./stm32/adc/figs/smpr1.eps}
+\includegraphics[width=\columnwidth]{./stm32/adc/figs/smpr1}
+\caption{SMPR1}
+\label{fig:smpr1}
+\end{figure}
+%
+\item What is the sampling time?
+\\
+\solution Since the sample time is 239.5 cycles and the ADC frequency is 14 MHz, 
+\begin{equation}
+T_{s} = 239.5 \times \frac{1}{14} \mu s = 17.1 \mu s 
+\end{equation}
+\item Explain the following instruction.
+\begin{lstlisting}
+ADC1->SQR3 |= ADC_SQR3_SQ1_4;
+\end{lstlisting}
+
+\solution ADC\_SQR3\_SQ1\_4 = 0x00000010.  This implies that SQ1=0b10000 in
+the ADC regular sequence register 3 ($ADC1->SQR3$)shown in Fig. \ref{fig:sqr3}. Since SQ1=16,
+this means that the ADC input in channel 16 will be the first in the queue
+for conversion. 
+%
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{./stm32/adc/figs/sqr3}
+\caption{SQR3}
+\label{fig:sqr3}
+\end{figure}
+%
+The ADC is capable of converting analog 16 inputs one after the other. 
+The inputs are called {\em channels} and the sequence number corresponding 
+to the channel
+is decided
+according to the 5 bit entry in SQ. 
+\subsection{Measuring an Unkown Resistance}
+\item Configure SQR3 so that the 9th channel for ADC1 is 2nd in sequence.
+\\
+\solution This implies that SQ2=1001.  Thus,
+\begin{equation}
+ADC1->SQR3 = 0x000000120
+\end{equation}
+\item List the various pin numbers corresponding to the different channels of the ADC.
+\\
+\solution See Fig. \ref{table:pin_channel}
+\input{./stm32/adc/figs/pin_channel.tex}
+\iffalse
+\begin{table}[!ht]
+\footnotesize
+\input{stm32/adc/figs/pin_channel.tex}
+\caption{ADC Analog Input Pins}
+\label{table:pin_channel}
+\end{table}
+\fi
+\item Use the 9th channel of  ADC1 in SQ2 to measure 3.3V. 
+\\
+\solution Connect PB1 (Fig. \ref{table:pin_channel}) to 3.3 V of the STM 32 and execute the following
+code.
+\begin{lstlisting}
+stm32/adc/codes/3_3V.c
+\end{lstlisting}
+%\section{Project}
+\item Measure an unkown resistance using the STM32 and display the result on the LCD.
+\item Display the output of the internal temperature sensor as well the unknown resistance on the LCD.
+\end{enumerate}
+

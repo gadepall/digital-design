@@ -1,6 +1,7 @@
 \begin{enumerate}[label=\arabic*.,ref=\theenumi]
 	\item The following instructions are for the picow toolchain
-		in debian
+		in termux-debian
+		\label{it:picow/installation/toolchain}
 \begin{lstlisting}
 cd .platformio/packages
 git clone https://github.com/earlephilhower/arduino-pico
@@ -11,23 +12,38 @@ git submodule update --init
 cd ../tools
 python3 ./get.py
 \end{lstlisting}
+\item Downlaod EtchDroid from F-DROID. 
 \item Now execute the following 
+\label{it:picow/installation/toolchain/rpi}
 \begin{lstlisting}
-cd picow/installation/codes/src/main.cpp
+cd picow/installation/codes/
 pio run
+cp .pio/build/rpipicow/firmware.uf2 /sdcard/Download/
 \end{lstlisting}
+\item  Keep BOOTSEL pressed on picow  and connect it to your phone.
+\item Now flash picow using EtchDroid.
+\item The Onboard LED will start blinking.
+\item Change the blink frequency.
+\item If Item \ref{it:picow/installation/toolchain} is unsuccessful, 
+\begin{enumerate}
+	\item
+		Execute Item
+\ref{it:picow/installation/toolchain/rpi}
+on your rpi
+	\item Copy relevant platformio packages from your raspberry pi to your phone .platformio/packages directory using scp.
+\end{enumerate}
+\item 
+	See
+			\figref{fig:picowpinout} for the picow pin diagram.
+			You may reuse all the Arduino codes for pico by changing only the platformio.ini file.
 % Insert your image here
 		\begin{figure}
 			\centering
     \includegraphics[width=\columnwidth]{picow/installation/figs/picowpinout.jpg}
-    \caption{Pico Pin Diagram} % Adds a centered caption under the image
+    \caption{picow Pin Diagram} % Adds a centered caption under the image
 			\label{fig:picowpinout}
 		\end{figure}
-\item Connect RUN on pico W to GND. Keep pressing BOOTSEL while removing the RUN-GND wire from GND.Pico W is now ready to be flashed.
-\begin{lstlisting}
-Downlaod EtchDroid from playstore.Flash the uf2 file using EtchDroid.
-\end{lstlisting}
-\item The Onboard LED will start blinking.
+%\item Connect RUN on pico W to GND. Keep pressing BOOTSEL while removing the RUN-GND wire from GND.Pico W is now ready to be flashed.
 \end{enumerate}
 
 
