@@ -2,12 +2,14 @@
 %
 \item A counter is constructed with three $D$ flip-flops. The input-output pairs are named $\brak{D_0, Q_0}$, $\brak{D_1, Q_1}$, and $\brak{D_2, Q_2}$, where the subscript $0$ denotes the least significant bit. The output sequence is desired to be the Gray-code sequence $000, 001, 011, 010, 110, 111, 101$, and $100$, repeating periodically. Note that the bits are listed in the $Q_2$  $Q_1$  $Q_0$ format. The combinational logic expression for $D_1$ is
 %
+	\begin{multicols}{2}
 \begin{enumerate}
     \item $Q_2 Q_1 Q_0$
     \item $Q_2 Q_0 + Q_1 \Bar{Q_0}$
     \item $\Bar{Q_2} Q_0 + Q_1 \Bar{Q_0}$
     \item $Q_2 Q_1 + \Bar{Q_2} \Bar{Q_1}$
 \end{enumerate}
+	\end{multicols}
 \hfill(GATE EE 2021)
 %
 \item Implement a 4-stage ripple counter utilizing flip-flops.
@@ -35,7 +37,7 @@ Starting from the initial value of the flip-flop outputs $Q2Q1Q0 =1 1 1$ with $D
 \item In the circuit in 
 	\figref{fig:GATE EC 2021},
 \label{prob:gate-ec-46.2021}
-the clock(Clk) frequency provided to the circuit is 500MHz.
+the clock (Clk) frequency provided to the circuit is 500MHz.
 Starting from the initial value of the flip-flop outputs $Q2Q1Q0 =111$ with $D2=1$, fine the time after which $Q2Q1Q0 = 1 0 0$. 
 \hfill (GATE EC 2021)
 %
@@ -94,6 +96,7 @@ For the $3$-bit binary counter shown in
 transition in the clock (CLK). Assume ideal diodes and the starting state of the counter as 
 $000$. If output high is $1 V$ and output low is $0 V$, find the current $I$ (in mA) flowing through the 
 $50 \Omega$ resistor during the $5$th clock cycle (up to one decimal place).
+
 \hfill(GATE IN 2018)
 \begin{figure}[H]
 \centering
@@ -106,6 +109,7 @@ $50 \Omega$ resistor during the $5$th clock cycle (up to one decimal place).
 Consider the sequential circuit shown in \figref{fig:wert}, where both flip-flops used are positive
     edge-triggered D flip-flops.
 The number of states in the state transition diagram of this circuit that have a transition back to the same state on some value of ``in" is \rule{1cm}{0.1pt}.
+   \hfill(GATE IN 2018)
 \begin{figure}[H]
         \centering      
         \includegraphics[width=0.75\columnwidth]{ide/7474/figs/wert.jpg}
@@ -113,7 +117,6 @@ The number of states in the state transition diagram of this circuit that have a
         \label{fig:wert}
     \end{figure}
 %
-   \hfill(GATE IN 2018)
    \item Implement the synchronous sequential circuit shown below 
 in \figref{fig:gate EC 2023}
 	   with a clock frequency of $500 Hz$. 
@@ -227,18 +230,32 @@ in \figref{fig:gate EC 2023}
 	\label{fig:GATE EC 2023}
 \end{figure}
 %
+\item Find the decimal equivalent of $ABCD$
+	in
+\figref{fig:Gate_question.png}.
+\hfill{(EE GATE 2023)}
+%
+\begin{figure}[H]
+ \centering
+\includegraphics[width=0.5\columnwidth]{ide/7474/figs/Gate_question.png}
+\caption{}
+\label{fig:Gate_question.png}
+\end{figure}
+%
 \item 
 Consider a sequential digital circuit consisting of T flip-flops and D flip-flops as shown in 
 \figref{fig:Flip-Flop}.
  CLKIN is is the clock input to the circuit. At the beginning,Q1,Q2 and Q3 have values 0,1 and 1, respectively.
 Which of the given values of \((Q_1, Q_2, Q_3)\) can NEVER be obtained with this digital circuit?
 \hfill(GATE CS 2023)
+	\begin{multicols}{4}
 \begin{enumerate}
     \item ${(0,0,1)}$
     \item ${(1,0,0)}$
     \item ${(1,0,1)}$
     \item ${(1,1,1)}$
 \end{enumerate}
+	\end{multicols}
 %
 	\begin{figure}[H]
     \centering
@@ -248,30 +265,20 @@ Which of the given values of \((Q_1, Q_2, Q_3)\) can NEVER be obtained with this
 \caption{}
 \label{fig:Flip-Flop}
 \end{figure}
-%
-\item Find the decimal equivalent of $ABCD$
-	in
-\figref{fig:Gate_question.png}.
-\hfill{(EE GATE 2023)}\\
-%
-\begin{figure}[H]
- \centering
-\includegraphics[width=0.5\columnwidth]{ide/7474/figs/Gate_question.png}
-\caption{}
-\label{fig:Gate_question.png}
-\end{figure}
 \item In the circuit shifter in 
 \figref{fig:cricuit Digram},
 the initial binary content of the shift register $A$ is $1101$ and that of shift register $B$ is $1010$ The shift registers are positive edge triggered, and the gates have no delay.
 when the shift control is high, which of the following are legitimate combinations of binary content of the shift registers $A$ and $B$ in any clock pulse?
 \hfill{(GATE IN 2023)}
 %
+\begin{multicols}{2}
 \begin{enumerate}
 \item $A= 1101,B=1101$
 \item $A=1110,B=1001$
 \item $A=0101,B=1101$
 \item $A=1010,B=1111$
 \end {enumerate}
+\end{multicols}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\columnwidth]{ide/7474/figs/Gate.png}
@@ -283,12 +290,14 @@ when the shift control is high, which of the following are legitimate combinatio
 in
 			\figref{fig:new_gate},
 	 the clock frequency is $f_0$ and the duty cycle is $25\%$. For the signal at the Q output of the Flip-Flop,\hfill(GATE EC 2022)
+			\begin{multicols}{2}
 			\begin{enumerate}
 			\item frequency is $\frac{{f_0}}{4}$ and duty cycle is $50\%$
 			\item frequency is $\frac{{f_0}}{4}$ and duty cycle is $25\%$
 			\item frequency is $\frac{{f_0}}{2}$ and duty cycle is $50\%$
 			\item frequency is ${f_0}$ and duty cycle is $25\%$
 		\end{enumerate}
+			\end{multicols}
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.75\columnwidth]{ide/7474/figs/gate_image_new.jpg}
@@ -303,18 +312,21 @@ in
   \caption{}
   \label{fig:GATEIN202236.png}
 \end{figure}
+			\begin{multicols}{2}
  \begin{enumerate}
  \item is a divide-by-$5$ counter
  \item is a divide-by-$7$ counter
  \item is a divide-by-$8$ counter
  \item does not function as a counter due to disjoint cycles of states 
 \end{enumerate}
+			\end{multicols}
 %
  \item Given below 
 in
 		      \figref{fig:GATE-IN2021}
 	 is the diagram of a synchronous sequential circuit with one $J-K$ flip-flop and one $T$ flip-flop with their outputs denoted as $A$ and $B$ respectively, with $J_{A}=\brak{A^{\prime}+B^{\prime}}$, $K_{A}=(A+B)$ and $T_{B}=A$. Starting from the initial state $\brak{AB=00}$, the sequence of states $\brak{AB}$ visited by the circuit is
 \hfill(GATE IN 2021)
+			\begin{multicols}{2}
 		  \begin{enumerate}
           \item $00 \rightarrow 01 \rightarrow 10 \rightarrow 11 \rightarrow 00 
           \dots $
@@ -323,6 +335,7 @@ in
           \item $00 \rightarrow 10 \rightarrow 11 \rightarrow 01 \rightarrow 00 \dots $
           \item $00 \rightarrow 01 \rightarrow 11 \rightarrow 00 \dots $
       \end{enumerate}
+			\end{multicols}
 	\begin{figure}[H]
     \centering
     \resizebox{0.75\columnwidth}{!}{%
@@ -376,12 +389,14 @@ the clock frequency is 12 KHz. The frequency of the signal at $Q2$ is  \rule{1cm
 	\figref{fig:GATE-IN2019,12}
 below uses ideal positive edge-triggered synchronous $J-K$ flip flops with outputs $X$ and $Y$. If the initial state of the output is $X=0$ and $Y=0$ just before the arrival of the first clock pulse, the state of the output just before the arrival of the second clock pulse is
               \hfill(GATE IN 2019)
+			\begin{multicols}{2}
 \begin{enumerate}
     \item $X=0$, $Y=0$
     \item $X=0$, $Y=1$
     \item $X=1$, $Y=0$
     \item$X=1$, $Y=1$
 \end{enumerate}
+			\end{multicols}
 	\begin{figure}[H]
     \centering
     \resizebox{0.75\columnwidth}{!}{%
@@ -406,12 +421,14 @@ below uses ideal positive edge-triggered synchronous $J-K$ flip flops with outpu
 	\figref{fig:GATE-PH2020,30}.
  The input signal to the counter is a series of square pulses and the change of state is triggered by the falling edge. At time $t=t_0$ the outputs are in logic low state (Q0 = Q1 = Q2 = Q3 = 0). Then at $t=t_1$, the logic state of the outputs is 
 		               \hfill(GATE PH 2020)
+			\begin{multicols}{2}
 \begin{enumerate}
 \item  Q0 = 1, Q1 = 0, Q2 = 0 and Q3 = 0 
 \item  Q0 = 0, Q1 = 0, Q2 = 0 and Q3 = 1
 \item  Q0 = 1, Q1 = 0, Q2 = 1 and Q3 = 0
 \item  Q0 = 0, Q1 = 1, Q2 = 1 and Q3 = 1
 \end{enumerate}
+			\end{multicols}
 \begin{figure}[H]
     \centering
     \resizebox{0.75\columnwidth}{!}{%
@@ -440,12 +457,14 @@ below uses ideal positive edge-triggered synchronous $J-K$ flip flops with outpu
 in \figref{fig:gate_in_2018_44}.
  The expression for the inputs to the J-K flip flops are also shown in the figure. The output sequence of the counter starting from $Q_{1}Q_{2} = 00$ is
 \hfill (GATE IN 2018)
+			\begin{multicols}{2}
 \begin{enumerate}
 \item $00 \rightarrow 11 \rightarrow 10 \rightarrow 01 \rightarrow 00 \hdots $
 \item $00 \rightarrow 01 \rightarrow 10 \rightarrow 11 \rightarrow 00 \hdots $
 \item $00 \rightarrow 01 \rightarrow 11 \rightarrow 10 \rightarrow 00 \hdots $
 \item $00 \rightarrow 10 \rightarrow 11 \rightarrow 01 \rightarrow 00 \hdots $
 \end{enumerate}
+			\end{multicols}
 %
 \begin{figure}[H]
 \centering
@@ -682,12 +701,14 @@ is \rule{1cm}{0.1pt}.
 		\label{fig:2024}
 	\end{figure}
 %
+			\begin{multicols}{2}
 \begin{enumerate}
     \item 00 $\to$ 10 $\to$ 11 $\to$ 00
     \item 11 $\to$ 00 $\to$ 10 $\to$ 01 $\to$ 00
     \item 01 $\to$ 10 $\to$ 11 $\to$ 00 $\to$ 01
     \item 00 $\to$ 01 $\to$ 10 $\to$ 00
 \end{enumerate}
+			\end{multicols}
 \iffalse
 \item The maximmunm clock frequeccy in MHz of a $4$-stage ripple counter, utilize flip-flops, with each flip-flop having a propagation delay of $20$ ns, is $\rule{2cm}{0.15mm}$.\\
 (\textit{round off to one decimal place})
@@ -737,12 +758,14 @@ in
        \figref{fig:GATE IN2017,43}.
 If $A=1$ and $B=0$, the output $Q\bar{Q}$ is
        \hfill (GATE IN 2017)
+			\begin{multicols}{4}
     \begin{enumerate}
    		\item $00$ 
    		\item $10$ 
    		\item $01$ 
    		\item $11$ 
    \end{enumerate}
+			\end{multicols}
     \begin{figure}[H]
         \centering
 	\resizebox{0.5\columnwidth}{!}{%
@@ -758,12 +781,14 @@ in
 \tabref{tab:PH2019,36}
  are
 \hfill (GATE PH 2019)
+			\begin{multicols}{4}
    \begin{enumerate}
 \item $1$ and $0$
 \item $0$ and $0$
 \item $0$ and $1$
 \item $1$ and $1$
 \end{enumerate}
+			\end{multicols}
 %
 \begin{figure}[H]
         \centering
