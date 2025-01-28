@@ -1,5 +1,4 @@
-// Code by GVV Sharma
-// Author-Shyam Anand
+// Code by Shyam Anand
 // December 24, 2024
 // released under GNU GPL
 

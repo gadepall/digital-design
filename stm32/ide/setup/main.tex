@@ -1,6 +1,6 @@
 \begin{enumerate}[label=\arabic*.,ref=\theenumi]
 %\begin{enumerate}[label=\thesubsection.\arabic*.,ref=\thesubsection.\theenumi]
-\item The STM32F103C8T6 micro-controller in Fig. \ref{fig:stm_blue} has two ground pins, few analog input pins and few digital pins that can be used for both input as well as output. It has one Vcc (3.3V) pin that can generate 3.3$V$.  In the following exercises, only the GND, 3.3$V$ and digital pins will be used.
+\item The STM32F103C8T6 micro-controller is shown  in Fig. \ref{fig:stm_blue}. 
 %
 \begin{figure}[!htb]
 \begin{center}
@@ -29,7 +29,7 @@ board = bluepill_f103c8
 \end{lstlisting}
 \item Now, complile the blink program
 \begin{lstlisting}
-cd stm32/ide/setup/codes
+cd stm32/ide/codes/setup/src
 pio run
 \end{lstlisting}
 \item With this .bin file will be generated and all the necessary packages will be installed.
